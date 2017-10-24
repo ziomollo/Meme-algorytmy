@@ -1,0 +1,169 @@
+#include<iostream>
+#include<cmath>
+using std::cout;
+using std::cin;
+
+int abs(int n)
+{
+    if(n < 0)
+        return n * -1;
+
+    return n;
+}
+int toInt(char a)
+{
+    int tmp = (int)a;
+
+    return abs(48-tmp);
+}
+
+void first(int m, int n)
+{
+    for(int i = 0 ; i < n ; ++i)
+    {
+        for(int j = 0 ; j < m ; ++j)
+        {
+            cout << "*";
+        }
+        cout << "\n";
+    }
+}
+
+
+void second(int n)
+{
+    for(int i = 0 ; i < n; i++)
+    {
+        for(int j = 0; j <= i; ++j)
+        {
+            cout << "*";
+        }
+        cout << "\n";
+    }
+}
+
+void third(int n)
+{
+    for(int i = 0 ; i < n ; ++i)
+    {
+        for(int j = i ; j < n-1; ++j)
+        {
+            cout << " ";
+        }
+        for(int k = 0 ; k <= i; ++k)
+        {
+            cout << "*";
+        }
+        cout << "\n";
+    }
+}
+
+void fourth(int n)
+{
+    for(int i = 1 ; i <= n ; ++i)
+    {
+        for(int j = 1 ; j <= n ; ++j)
+        {
+            cout << i << "x" << j << " = " << i * j << " | ";
+        }
+        cout << "\n";
+    }
+}
+
+void fifth(int n)
+{
+    double s = 0;
+    for(int i = 0 ; i < n ; ++i)
+    {
+        s += pow(i+3,3) - 8;
+    }
+    s /= n;
+
+    cout << s;
+
+}
+
+void sixth(int n)
+{
+    for(int i = 2 ; i * i <= n ; ++i)
+    {
+        if(n % i == 0)
+        {
+            cout << "Nie jest";
+            return;
+        }
+    }
+
+    cout << "Jest!";
+}
+
+void seventh(int n)
+{
+    int suma = 0;
+    for(int i = 1 ; i < n ; ++i)
+    {
+        if( n % i == 0)
+        {
+            suma += i;
+        }
+    }
+
+    if(suma == n)
+    {
+        cout << "Liczba jest doskonala!";
+        return;
+    }
+
+    cout << "Liczba nie jest doskonala";
+}
+
+void eighth(std::string meme)
+{
+    int suma = 0;
+    for(int i = 0 ; i < meme.size(); ++i)
+    {
+        suma += toInt(meme[i]);
+    }
+
+    cout << suma;
+}
+
+void ninth(std::string palindrom)
+{
+    std::string m;
+    for(int i = palindrom.size()-1 ; i >= 0; --i)
+    {
+        m+= palindrom[i];
+    }
+
+    if(m == palindrom)
+    {
+        cout << "Palindrom!";
+        return;
+    }
+    cout << "Nie jest palindromem";
+}
+
+void tenth(std::string memes)
+{
+    int liczba = 0;
+    for(int i = memes.size()-1, powx = 0; i >= 0; --i, ++powx)
+    {
+        if(toInt(memes[i]) == 1)
+            liczba += pow(2,powx);
+    }
+    cout << liczba;
+}
+
+void eleventh(int n)
+{
+    if(n != 1)
+        eleventh(n/2);
+
+    cout << n%2;
+}
+
+int main()
+{
+    eleventh(4);
+}
