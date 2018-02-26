@@ -1,0 +1,74 @@
+#include<windows.h>
+#include<stdio.h>
+void gotoxy(int x,int y)
+{
+    COORD coord;
+    coord.X = x;
+    coord.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+
+int main()
+{
+
+    for(int i = 0,j = 0 ; i < 5 ; ++i,++j)
+    {
+        gotoxy(19-i,j);
+        for(int k = 0; k < 2*i + 1; ++k )
+        {
+            printf("*");
+        }
+    }
+    for(int i = 0,j = 5 ; i < 5 ; ++i,++j)
+    {
+        gotoxy(14-i,j);
+        for(int k = 0; k < 2*i + 1; ++k )
+        {
+            printf("*");
+        }
+        gotoxy(24-i,j);
+        for(int k = 0; k < 2*i + 1; ++k )
+        {
+            printf("*");
+        }
+    }
+
+
+    for(int i = 0,j = 10 ; i < 5 ; ++i,++j)
+    {
+        gotoxy(9-i,j);
+        for(int k = 0; k < 2*i + 1; ++k )
+        {
+            printf("*");
+        }
+        gotoxy(29-i,j);
+        for(int k = 0; k < 2*i + 1; ++k )
+        {
+            printf("*");
+        }
+    }
+    for(int i = 0,j = 15 ; i < 5 ; ++i,++j)
+    {
+        gotoxy(4-i,j);
+        for(int k = 0; k < 2*i + 1; ++k )
+        {
+            printf("*");
+        }
+         gotoxy(14-i,j);
+        for(int k = 0; k < 2*i + 1; ++k )
+        {
+            printf("*");
+        }
+        gotoxy(24-i,j);
+        for(int k = 0; k < 2*i + 1; ++k )
+        {
+            printf("*");
+        }
+         gotoxy(34-i,j);
+        for(int k = 0; k < 2*i + 1; ++k )
+        {
+            printf("*");
+        }
+    }
+}
+
