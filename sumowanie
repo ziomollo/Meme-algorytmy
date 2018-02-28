@@ -1,0 +1,63 @@
+#include<iostream>
+#include<vector>
+#include<ctime>
+#include<algorithm>
+
+using std::sort;
+using std::cout;
+using std::cin;
+using std::vector;
+
+void setRandomElements(int amount,vector<int>& vec){
+	for(int i = 0 ; i < amount ; ++i){
+		vec.emplace_back(rand()%15+1);
+	}
+}
+
+bool doesExist(int x,vector<int>& a, vector<int>&b){
+	
+	int i = 0;
+	int j = a.size()-1;
+	
+	while( i < a.size() - 1  && j >= 0){
+		
+		if(a[i] + b[j] == x || a[j] + b[i] == x){
+			return true;
+		}else{
+			++i;
+			--j;
+		}
+	}
+	
+	return false;
+}
+
+int main(int argc,char* argv[]){
+	vector<int> a,b;
+	srand(time(NULL));
+	
+	cout << "Podaj liczbe elementow dla obu tablic: ";
+	int n;
+	cin >> n;
+	setRandomElements(n,a);
+	setRandomElements(n,b);
+	cout << "Podaj liczbe do sprawdzenia czy istnieje suma: ";
+	cin >> n;
+	
+	sort(a.begin(),a.end(),[](int a, int b) -> bool { return a < b; });
+	sort(b.begin(),b.end(),[](int a, int b) -> bool { return a < b; });
+	
+	
+	for(auto& x : a){
+		std::cout << x << " ";
+	}
+	cout << "\n";
+	for(auto& x : b){
+		cout << x << " ";
+	}
+
+	
+	cout << "\n" <<  std::boolalpha << doesExist(n,a,b);
+	
+	return 0;
+}
