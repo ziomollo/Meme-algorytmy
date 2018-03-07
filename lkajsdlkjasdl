@@ -1,0 +1,47 @@
+#include<iostream>
+#include<algorithm>
+#include<vector>
+
+using namespace std;
+int main(){
+
+    std::vector<int> v;
+    int cap;
+    cin >> cap;
+    int amount;
+    cin >> amount;
+    int m;
+    for(int i = 0 ; i < amount; ++i){
+            cin >> m;
+        v.emplace_back(m);
+    }
+    std::sort(v.begin(),v.end(),[](int a,int b){return a < b;});
+    int c = 0;
+    int i = 0;
+    int j = v.size() - 1;
+    while(i <= j){
+
+        if(v[i] + v[j] > cap){
+            if(v[i] > v[j]){
+                c++;
+                i++;
+            }else if(v[i] < v[j]){
+                c++;
+                j--;
+            }else{
+                c+=2;
+                j--;
+                i++;
+            }
+        }else{
+           c++;
+           i++;
+           j--;
+        }
+    }
+
+    std::cout << c;
+
+
+
+}
