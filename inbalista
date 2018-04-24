@@ -1,0 +1,64 @@
+#include<stdio.h>
+
+typedef struct Node Node;
+typedef struct List List;
+struct Node{
+    Node* node;
+    int x;
+};
+struct List{
+    Node* root;
+    int size;
+
+    void (*add)(List*,int);
+    int (*get)(List,int);
+};
+
+int get(List list,int index){
+    if(index > list.size - 1){
+        printf("Za duzy index :)\n");
+        return NULL;
+    }
+    //if(index == 0){
+      //  return list.root->x;
+   // }
+    int val;
+    int i = 0;
+    Node* node = list.root;
+    while(i <= index){
+        val = node->x;
+        node = node-> node;
+        i++;
+    }
+    return val;
+
+}
+
+ void add( List* list,int v){
+        if(list->root == NULL){
+            list->root = (Node*)malloc(sizeof(struct Node));
+            list->root->x = v;
+            list->size++;
+        }else{
+
+            struct Node* tmp = list->root;
+            printf("%d\n",tmp->x);
+            while(tmp->node!=NULL){
+                tmp = tmp->node;
+            }
+
+            tmp->node =  (struct Node*)malloc(sizeof(struct Node));
+            tmp->node->x = v;
+            printf("%d\n",tmp->node->x);
+            list->size = list->size + 1;
+        }
+}
+
+int main()
+{
+    List list = {NULL,0,add,get};
+    list.add(&list,12);
+    list.add(&list,132);
+    //int x = list.get(list,0);
+    //printf("%d\n",x);
+}
