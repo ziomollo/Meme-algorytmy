@@ -1,0 +1,80 @@
+#pragma once
+#include<iostream>
+#include<stdexcept>
+
+class Fraction {
+public:
+    Fraction(int numerator, int denumerator) : numerator(numerator), denumerator(denumerator) {
+        if(denumerator == 0) throw std::invalid_argument("Denumator can't be equal 0");
+    }
+
+    Fraction() {}
+
+    friend std::ostream & operator << (std::ostream& out, const Fraction& fraction) {
+        out << fraction.numerator << "/" << fraction.denumerator;
+        return out;
+    }
+
+    friend std::istream & operator >> (std::istream& in, Fraction& fraction) {
+        in >> fraction.numerator >> fraction.denumerator;
+        return in;
+    }
+
+    inline Fraction operator / (const Fraction b) {
+        return Fraction(this->numerator * b.denumerator, b.numerator * this->denumerator);
+    }
+
+    inline Fraction operator * (const Fraction b) {
+        return Fraction(this->numerator * b.numerator, b.denumerator * this->denumerator);
+    }
+
+    Fraction  operator - (const Fraction b) {
+        return this->denumerator == b.denumerator ?
+            Fraction(this->numerator - b.numerator, this->denumerator) :
+            substraction(b);
+    }
+
+    Fraction  operator + (const Fraction b) {
+        return this->denumerator == b.denumerator ?
+            Fraction(this->numerator + b.numerator, this->denumerator) :
+            addition(b);
+    }
+
+private:
+
+    Fraction  substraction(const Fraction& b) {
+        int commonDenumerator = leastCommonMultiply(this->denumerator, b.denumerator);
+        int aNumerator = this->numerator * (commonDenumerator / this->denumerator);
+        int bNumerator = b.numerator * (commonDenumerator / b.denumerator);
+        return Fraction(aNumerator - bNumerator, commonDenumerator);
+    }
+
+    Fraction  addition(const Fraction& b) {
+        int commonDenumerator = leastCommonMultiply(this->denumerator, b.denumerator);
+        int aNumerator = this->numerator * (commonDenumerator / this->denumerator);
+        int bNumerator = b.numerator * (commonDenumerator / b.denumerator);
+        return Fraction(aNumerator + bNumerator, commonDenumerator);
+    }
+
+    int greaterCommonDivisor(int a, int b) {
+        int pom;
+
+        while(b!=0)
+        {
+            pom = b;
+            b = a%b;
+            a = pom;
+        }
+
+        return a;
+    }
+
+    int leastCommonMultiply(int a, int b) {
+        return (a * b) / greaterCommonDivisor(a, b);
+    }
+
+
+private:
+    int numerator;
+    int denumerator;
+};
